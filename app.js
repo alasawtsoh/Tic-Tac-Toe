@@ -1,21 +1,26 @@
 let cells = document.querySelectorAll("[data-cell]");
+let moves = [];
+let currentMoveIndex = -1;
+let choice = false;
+let winner = null;
+let counter = 0;
 
-// this will give each element an event listener
+document.getElementById("winner").textContent = "It's O's turn";
+
 cells.forEach((cell, i) => {
   cell.addEventListener("click", handleclick, { once: true });
 });
-let choice = false;
-let winner = null;
-var counter = 0;
 
-document.getElementById("winner").textContent = "It's O's turn";
 function handleclick(e) {
-  // change the value in that cell
-  choice
-    ? (document.getElementById("winner").textContent = "It's O's turn")
-    : (document.getElementById("winner").textContent = "It's X's turn");
-  counter++;
   let cell = e.target;
+  let move = {
+    cellIndex: Array.from(cells).indexOf(cell),
+    player: choice ? "X" : "O",
+  };
+  moves.push(move);
+  currentMoveIndex++;
+  
+  counter++;
   if (choice === true) {
     cell.textContent = "X";
   } else {
@@ -30,10 +35,10 @@ function handleclick(e) {
   winner && document.querySelector(".replay").classList.toggle("hide");
 
   choice = !choice;
+  updateButtons();
 }
 
 function check(pick) {
-  //Array with possible winning combinations
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -56,19 +61,75 @@ function check(pick) {
     }
   }
 }
+
 function setWinner(p) {
   document.getElementById("winner").textContent = p + " is the winner ";
 
-  //Prevent clicking the board after winner is set
   cells.forEach((cell, i) => {
     cell.removeEventListener("click", handleclick, { once: true });
   });
 }
+
 function clean() {
   window.location.reload();
 }
 
-// Try the most easy
-// DRY : don't repeat yorself
-// check for back practice
-// emprove your app
+
+function showPrevious() {
+  if (currentMoveIndex >= 0) {
+    const move = moves[currentMoveIndex];
+    const { cellIndex, player } = move;
+    cells[cellIndex].textContent = "";
+    choice = player === "X";
+    document.getElementById("winner").textContent =
+      choice ? "It's X's turn" : "It's O's turn";
+    currentMoveIndex--;
+    updateButtons();
+  }
+}
+
+function showNext() {
+  if (currentMoveIndex < moves.length - 1) {
+    currentMoveIndex++;
+    const move = moves[currentMoveIndex];
+    const { cellIndex, player } = move;
+    cells[cellIndex].textContent = player;
+    choice = player === "X";
+    document.getElementById("winner").textContent =
+      choice ? "It's X's turn" : "It's O's turn";
+    updateButtons();
+  }
+}
+
+// function showPrevious() {
+//   currentMoveIndex--;
+//   const move = moves[currentMoveIndex];
+//   if (move) {
+//     const { cellIndex, player } = move;
+//     cells[cellIndex].textContent = "";
+//     choice = player === "X";
+//     document.getElementById("winner").textContent =
+//       choice ? "It's X's turn" : "It's O's turn";
+//     updateButtons();
+//   }
+// }
+
+// function showNext() {
+//   currentMoveIndex++;
+//   const move = moves[currentMoveIndex];
+//   if (move) {
+//     const { cellIndex, player } = move;
+//     cells[cellIndex].textContent = player;
+//     choice = player === "X";
+//     document.getElementById("winner").textContent =
+//       choice ? "It's X's turn" : "It's O's turn";
+//     updateButtons();
+//   }
+// }
+
+function updateButtons() {
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  previousButton.disabled = currentMoveIndex <= 0;
+  nextButton.disabled = currentMoveIndex >= moves.length - 1;
+}

@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="./style.css" />
@@ -30,7 +29,16 @@
     <div class="replay hide">
       <button onclick="clean()">Replay</button>
     </div>
+    <!-- added features -->
+    <div class="history">
+      <button onclick="showPrevious()" id="previous"><ion-icon name="play-back-outline"></ion-icon></button>
+      <button onclick="showNext()" id="next"><ion-icon name="play-forward-outline"></ion-icon></button>
     </div>
-    <script src="./app.js"></script>
+    
   </body>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="./app.js"></script>
 </html>
+
+
