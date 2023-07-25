@@ -60,8 +60,12 @@ function handleNormalClick(index) {
   }
   
   function handleClick(index) {
-    if (!inHistoryMode) {
-      handleNormalClick(index);
+    if (inHistoryMode) {
+      // Handle click during history navigation
+      exitHistoryMode(); // Exit history mode to enable normal clicks
+      handleNormalClick(index); // Perform the normal click
+    } else {
+      handleNormalClick(index); // Handle normal click
     }
   }
   
@@ -95,22 +99,22 @@ cells.forEach((cell, index) => {
       const move = history[currentMoveIndex];
       gameBoard = history.slice(0, currentMoveIndex + 1).map((move) => (move.player === "X" ? "X" : "O"));
       currentPlayer = move.player === "X" ? "O" : "X";
-      removeCellEventListeners(); // Remove cell event listeners during history navigation
       renderBoard();
+      exitHistoryMode(); // Call exitHistoryMode to reattach event listeners
     }
   }
 
-  function showNext() {
-    if (currentMoveIndex < history.length - 1) {
-      inHistoryMode = true;
-      currentMoveIndex++;
-      const move = history[currentMoveIndex];
-      gameBoard[move.index] = move.player;
-      currentPlayer = move.player === "X" ? "O" : "X";
-      removeCellEventListeners(); // Remove cell event listeners during history navigation
-      renderBoard();
-    }
+ function showNext() {
+  if (currentMoveIndex < history.length - 1) {
+    inHistoryMode = true;
+    currentMoveIndex++;
+    const move = history[currentMoveIndex];
+    gameBoard[move.index] = move.player;
+    currentPlayer = move.player === "X" ? "O" : "X";
+    renderBoard();
+    exitHistoryMode(); // Call exitHistoryMode to reattach event listeners
   }
+}
   
 
   function removeCellEventListeners() {
@@ -119,11 +123,11 @@ cells.forEach((cell, index) => {
     });
   }
 
-  function exitHistoryMode() {
-    inHistoryMode = false;
-    renderBoard();
-    addCellEventListeners(); // Add cell event listeners after exiting history navigation
-  }
+ function exitHistoryMode() {
+  inHistoryMode = false;
+  removeCellEventListeners(); // Remove cell event listeners during history navigation
+  renderBoard(); // Update the board after exiting history mode
+}
   
   
   function resetGame() {
