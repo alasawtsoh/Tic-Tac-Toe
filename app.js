@@ -1,45 +1,14 @@
-let cells = document.querySelectorAll("[data-cell]");
-let moves = [];
+const cells = document.querySelectorAll("[data-cell]");
+const historyLog = document.querySelector(".history-log");
+
+let currentPlayer = "X";
+let gameBoard = ["", "", "", "", "", "", "", "", ""];
+let history = [];
 let currentMoveIndex = -1;
-let choice = false;
-let winner = null;
-let counter = 0;
+let inHistoryMode = false; // Flag to indicate whether in history navigation mode
 
-document.getElementById("winner").textContent = "It's O's turn";
-
-cells.forEach((cell, i) => {
-  cell.addEventListener("click", handleclick, { once: true });
-});
-
-function handleclick(e) {
-  let cell = e.target;
-  let move = {
-    cellIndex: Array.from(cells).indexOf(cell),
-    player: choice ? "X" : "O",
-  };
-  moves.push(move);
-  currentMoveIndex++;
-  
-  counter++;
-  if (choice === true) {
-    cell.textContent = "X";
-  } else {
-    cell.textContent = "O";
-  }
-  winner = check("X");
-  winner = check("O");
-  if (counter == 9 && !winner) {
-    document.getElementById("winner").textContent = "It's a draw";
-    document.querySelector(".replay").classList.toggle("hide");
-  }
-  winner && document.querySelector(".replay").classList.toggle("hide");
-
-  choice = !choice;
-  updateButtons();
-}
-
-function check(pick) {
-  const lines = [
+function checkWin() {
+  const winPatterns = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -49,87 +18,139 @@ function check(pick) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (
-      cells[a].textContent &&
-      cells[a].textContent === cells[b].textContent &&
-      cells[a].textContent === cells[c].textContent
-    ) {
-      setWinner(cells[a].textContent);
-      return pick;
+
+  for (const pattern of winPatterns) {
+    const [a, b, c] = pattern;
+    if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+      return true;
     }
   }
+
+  return false;
 }
 
-function setWinner(p) {
-  document.getElementById("winner").textContent = p + " is the winner ";
+function checkDraw() {
+  return gameBoard.every((cell) => cell);
+}
 
-  cells.forEach((cell, i) => {
-    cell.removeEventListener("click", handleclick, { once: true });
+function handleNormalClick(index) {
+    if (currentMoveIndex < history.length - 1) {
+      history.splice(currentMoveIndex + 1);
+    }
+  
+    if (gameBoard[index] === "" && !checkWin() && !checkDraw()) {
+      gameBoard[index] = currentPlayer;
+      const move = { player: currentPlayer, index: index };
+      history.push(move);
+  
+      currentMoveIndex = history.length - 1;
+      renderBoard();
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+  
+      if (checkWin()) {
+        setTimeout(() => {
+          alert(`${move.player} wins!`);
+        }, 100);
+      } else if (checkDraw()) {
+        setTimeout(() => {
+          alert("It's a draw!");
+        }, 100);
+      }
+    }
+  }
+  
+  function handleClick(index) {
+    if (!inHistoryMode) {
+      handleNormalClick(index);
+    }
+  }
+  
+  
+  function renderBoard() {
+    cells.forEach((cell, index) => {
+      cell.textContent = gameBoard[index];
+    });
+    
+
+  // Update history log
+  historyLog.innerHTML = "";
+  for (const move of history) {
+    const { player, index } = move;
+    const moveItem = document.createElement("div");
+    moveItem.textContent = `${player} placed at position ${index}`;
+    historyLog.appendChild(moveItem);
+  }
+}
+
+cells.forEach((cell, index) => {
+    cell.addEventListener("click", () => handleClick(index));
   });
-}
-
-function clean() {
-  window.location.reload();
-}
-
-
-function showPrevious() {
-  if (currentMoveIndex >= 0) {
-    const move = moves[currentMoveIndex];
-    const { cellIndex, player } = move;
-    cells[cellIndex].textContent = "";
-    choice = player === "X";
-    document.getElementById("winner").textContent =
-      choice ? "It's X's turn" : "It's O's turn";
-    currentMoveIndex--;
-    updateButtons();
+  
+  renderBoard();
+  
+  function showPrevious() {
+    if (currentMoveIndex > 0) {
+      inHistoryMode = true;
+      currentMoveIndex--;
+      const move = history[currentMoveIndex];
+      gameBoard = history.slice(0, currentMoveIndex + 1).map((move) => (move.player === "X" ? "X" : "O"));
+      currentPlayer = move.player === "X" ? "O" : "X";
+      renderBoard();
+      addCellEventListeners(); // Add cell event listeners when exiting history navigation
+    }
   }
-}
 
-function showNext() {
-  if (currentMoveIndex < moves.length - 1) {
-    currentMoveIndex++;
-    const move = moves[currentMoveIndex];
-    const { cellIndex, player } = move;
-    cells[cellIndex].textContent = player;
-    choice = player === "X";
-    document.getElementById("winner").textContent =
-      choice ? "It's X's turn" : "It's O's turn";
-    updateButtons();
+  function showNext() {
+    if (currentMoveIndex < history.length - 1) {
+      inHistoryMode = true;
+      currentMoveIndex++;
+      const move = history[currentMoveIndex];
+      gameBoard[move.index] = move.player;
+      currentPlayer = move.player === "X" ? "O" : "X";
+      renderBoard();
+      addCellEventListeners(); // Add cell event listeners when exiting history navigation
+    }
   }
-}
 
-// function showPrevious() {
-//   currentMoveIndex--;
-//   const move = moves[currentMoveIndex];
-//   if (move) {
-//     const { cellIndex, player } = move;
-//     cells[cellIndex].textContent = "";
-//     choice = player === "X";
-//     document.getElementById("winner").textContent =
-//       choice ? "It's X's turn" : "It's O's turn";
-//     updateButtons();
-//   }
-// }
+  function removeCellEventListeners() {
+    cells.forEach((cell) => {
+      cell.removeEventListener("click", handleNormalClick);
+    });
+  }
 
-// function showNext() {
-//   currentMoveIndex++;
-//   const move = moves[currentMoveIndex];
-//   if (move) {
-//     const { cellIndex, player } = move;
-//     cells[cellIndex].textContent = player;
-//     choice = player === "X";
-//     document.getElementById("winner").textContent =
-//       choice ? "It's X's turn" : "It's O's turn";
-//     updateButtons();
-//   }
-// }
-
-function updateButtons() {
-  const previousButton = document.getElementById("previous");
-  const nextButton = document.getElementById("next");
-  previousButton.disabled = currentMoveIndex <= 0;
-  nextButton.disabled = currentMoveIndex >= moves.length - 1;
-}
+  function exitHistoryMode() {
+    inHistoryMode = false;
+    renderBoard();
+    addCellEventListeners(); // Add cell event listeners after exiting history navigation
+  }
+  
+  function resetGame() {
+    gameBoard = ["", "", "", "", "", "", "", "", ""];
+    currentPlayer = "X";
+    history = [];
+    currentMoveIndex = -1; // Reset the move index
+    renderBoard();
+    addCellEventListeners(); // Add cell event listeners after resetting the game
+  }
+  
+  function addCellEventListeners() {
+    cells.forEach((cell, index) => {
+      cell.addEventListener("click", () => {
+        if (!inHistoryMode) {
+          handleNormalClick(index);
+        }
+      });
+    });
+  }
+  
+  function replayGame() {
+    resetGame();
+  }
+ 
+  
+  
+  
+  
+  
+  
+  

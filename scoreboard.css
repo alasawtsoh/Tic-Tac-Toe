@@ -1,0 +1,23 @@
+
+.scoreboard {
+    display: flex;
+    justify-content: flex-end; /* Align scoreboard to the right side */
+    margin-bottom: 10px;
+  }
+  
+  .score {
+    display: flex;
+    align-items: center;
+    margin-left: 20px; /* Add some space between the score items */
+  }
+  
+  .player {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .score-x,
+  .score-o {
+    font-weight: bold;
+  }
+  

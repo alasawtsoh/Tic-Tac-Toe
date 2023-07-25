@@ -1,44 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h2>Tic Tac Toe</h2>
-    <div class="board">
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-      <div class="cell" data-cell></div>
-    </div>
-    <div class="turn">
-      <h4 id="turn"></h4>
-    </div>
-    <div class="winner">
-      <h4 id="winner"></h4>
-    </div>
-    <div class="replay hide">
-      <button onclick="clean()">Replay</button>
-    </div>
-    <!-- added features -->
-    <div class="history">
-      <button onclick="showPrevious()" id="previous"><ion-icon name="play-back-outline"></ion-icon></button>
-      <button onclick="showNext()" id="next"><ion-icon name="play-forward-outline"></ion-icon></button>
-    </div>
-    
-  </body>
+<html>
+<head>
+  <title>Tic-Tac-Toe Game</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="game-board">
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+  </div>
+  <div class="history-log">
+    <!-- History log goes here -->
+  </div>
+  <div class="buttons">
+    <button onclick="showPrevious()" id="previous"><ion-icon name="play-back-outline"></ion-icon></button>
+    <button onclick="showNext()" id="next"><ion-icon name="play-forward-outline"></ion-icon></button>
+    <button onclick="resetGame()" id="replay">Replay</button>
+  </div>
+  <script src="./script.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./app.js"></script>
+</body>
 </html>
-
-
