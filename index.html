@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Tic-Tac-Toe Game</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="game-board">
@@ -16,6 +16,15 @@
     <div class="cell" data-cell></div>
     <div class="cell" data-cell></div>
   </div>
+  <!-- scoreboard -->
+  <div class="scoreboard">
+    <div class="score" id="player-x-score">
+      Player X: 0
+    </div>
+    <div class="score" id="player-o-score">
+      Player O: 0
+    </div>
+  </div>
   <div class="history-log">
     <!-- History log goes here -->
   </div>
@@ -24,8 +33,9 @@
     <button onclick="showNext()" id="next"><ion-icon name="play-forward-outline"></ion-icon></button>
     <button onclick="resetGame()" id="replay">Replay</button>
   </div>
-  <script src="./script.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  
 </body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="app.js"></script>
 </html>

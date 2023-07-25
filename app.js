@@ -95,8 +95,8 @@ cells.forEach((cell, index) => {
       const move = history[currentMoveIndex];
       gameBoard = history.slice(0, currentMoveIndex + 1).map((move) => (move.player === "X" ? "X" : "O"));
       currentPlayer = move.player === "X" ? "O" : "X";
+      removeCellEventListeners(); // Remove cell event listeners during history navigation
       renderBoard();
-      addCellEventListeners(); // Add cell event listeners when exiting history navigation
     }
   }
 
@@ -107,10 +107,11 @@ cells.forEach((cell, index) => {
       const move = history[currentMoveIndex];
       gameBoard[move.index] = move.player;
       currentPlayer = move.player === "X" ? "O" : "X";
+      removeCellEventListeners(); // Remove cell event listeners during history navigation
       renderBoard();
-      addCellEventListeners(); // Add cell event listeners when exiting history navigation
     }
   }
+  
 
   function removeCellEventListeners() {
     cells.forEach((cell) => {
@@ -123,6 +124,7 @@ cells.forEach((cell, index) => {
     renderBoard();
     addCellEventListeners(); // Add cell event listeners after exiting history navigation
   }
+  
   
   function resetGame() {
     gameBoard = ["", "", "", "", "", "", "", "", ""];
@@ -143,14 +145,20 @@ cells.forEach((cell, index) => {
     });
   }
   
+  addCellEventListeners();
+  
   function replayGame() {
     resetGame();
-  }
- 
+  } 
   
   
-  
-  
-  
-  
-  
+  let playerXScore = 0;
+let playerOScore = 0;
+
+function updateScoreboard() {
+  const playerXScoreElement = document.getElementById("player-x-score");
+  const playerOScoreElement = document.getElementById("player-o-score");
+
+  playerXScoreElement.textContent = `Player X: ${playerXScore}`;
+  playerOScoreElement.textContent = `Player O: ${playerOScore}`;
+}

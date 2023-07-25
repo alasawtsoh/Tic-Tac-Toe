@@ -7,10 +7,14 @@ body {
 }
 
 .game-board {
+  /* Your existing styles for the game board */
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  gap: 4px;
+  grid-gap: 4px;
+  border: 2px solid #333;
+  width: 312px;
 }
+
 
 .cell {
   width: 100px;
@@ -27,4 +31,33 @@ body {
   margin-top: 20px;
 }
 
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  width: 312px;
+  margin-bottom: 20px;
+}
 
+.score {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.buttons {
+  /* Your existing styles for the buttons */
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+
+.previous {
+  margin-top: 10px;
+}
+
+.next {
+  margin: 0 5px;
+}
