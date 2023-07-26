@@ -54,33 +54,34 @@ function checkDraw() {
 }
 
 function makeMove(index) {
-    if (board[index] === '' && !checkWinner() && !checkDraw()) {
-      board[index] = currentPlayer;
-      moveHistory.push(index);
-      moveHistoryIndex = moveHistory.length - 1;
-      cells[index].innerText = currentPlayer;
-  
-      const winner = checkWinner();
-      if (winner) {
-        updateScores(winner);
-        setTimeout(() => {
-          alert(winner === 'X' ? 'Player X wins!' : 'Player O wins!');
-        }, 10);
-      } else if (checkDraw()) {
-        updateScores('Draw');
-        setTimeout(() => {
-          alert('It\'s a draw!');
-        }, 10);
-      }
-  
-      // Update currentPlayer after checking for winner or draw
-      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-  
-      // Add the move to the history log
-      historyLog.innerHTML += `<li>Player ${currentPlayer} moved to cell ${index}</li>`;
-      historyLog.scrollTop = historyLog.scrollHeight; // Auto-scroll to the bottom of the log
+  if (board[index] === '' && !checkWinner() && !checkDraw()) {
+    const player = currentPlayer; // Store the current player
+    board[index] = player;
+    moveHistory.push(index);
+    moveHistoryIndex = moveHistory.length - 1;
+    cells[index].innerText = player;
+
+    const winner = checkWinner();
+    if (winner) {
+      updateScores(winner);
+      setTimeout(() => {
+        alert(winner === 'X' ? 'Player X wins!' : 'Player O wins!');
+      }, 10);
+    } else if (checkDraw()) {
+      updateScores('Draw');
+      setTimeout(() => {
+        alert('It\'s a draw!');
+      }, 10);
     }
+
+    // Update currentPlayer after checking for winner or draw
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+    // Add the move to the history log with the current player
+    historyLog.innerHTML += `<li>Player ${player} moved to cell ${index}</li>`;
+    historyLog.scrollTop = historyLog.scrollHeight; // Auto-scroll to the bottom of the log
   }
+}
 
   function updateScores(winner) {
   if (winner === 'X') {
