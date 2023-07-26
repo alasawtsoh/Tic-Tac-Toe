@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tic-Tac-Toe Game</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
-  <div class="game-board">
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
-    <div class="cell" data-cell></div>
+  <h1>Tic Tac Toe</h1>
+  <div class="container" id="gameBoard">
+    <div class="cell" onclick="makeMove(0)"></div>
+    <div class="cell" onclick="makeMove(1)"></div>
+    <div class="cell" onclick="makeMove(2)"></div>
+    <div class="cell" onclick="makeMove(3)"></div>
+    <div class="cell" onclick="makeMove(4)"></div>
+    <div class="cell" onclick="makeMove(5)"></div>
+    <div class="cell" onclick="makeMove(6)"></div>
+    <div class="cell" onclick="makeMove(7)"></div>
+    <div class="cell" onclick="makeMove(8)"></div>
   </div>
-  <!-- scoreboard -->
-  <div class="scoreboard">
-    <div class="score" id="player-x-score">
-      Player X: 0
+  <div class="scoreboard-container">
+    <div class="scoreboard">
+      <div class="score">Player X: <span id="scoreX">0</span></div>
+      <div class="score">Player O: <span id="scoreO">0</span></div>
+      <div class="score">Draw: <span id="scoreDraw">0</span></div>
     </div>
-    <div class="score" id="player-o-score">
-      Player O: 0
-    </div>
+  <div class="controls">
+    <button onclick="undoMove()">Undo</button>
+    <button onclick="redoMove()">Redo</button>
   </div>
-  <div class="history-log">
-    <!-- History log goes here -->
-  </div>
-  <div class="buttons">
-    <button onclick="showPrevious()" id="previous"><ion-icon name="play-back-outline"></ion-icon></button>
-    <button onclick="showNext()" id="next"><ion-icon name="play-forward-outline"></ion-icon></button>
-    <button onclick="resetGame()" id="replay">Replay</button>
-  </div>
-  
+   <button onclick="resetBoard()">Restart</button>
+   <button onclick="clearHistory()">Clear History</button>
+   <div id="historyLog" class="history"></div>
+  <script src="./app.js"></script>
 </body>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="app.js"></script>
 </html>

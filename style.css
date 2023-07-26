@@ -1,63 +1,68 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-.game-board {
-  /* Your existing styles for the game board */
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-gap: 4px;
-  border: 2px solid #333;
-  width: 312px;
-}
-
-
-.cell {
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  background-color: lightgray;
-  cursor: pointer;
-}
-
-.history-log {
-  margin-top: 20px;
-}
-
-.scoreboard {
-  display: flex;
-  justify-content: space-between;
-  width: 312px;
-  margin-bottom: 20px;
-}
-
-.score {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-
-.buttons {
-  /* Your existing styles for the buttons */
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  font-family: Arial, sans-serif;
   text-align: center;
 }
 
-
-.previous {
-  margin-top: 10px;
+h1 {
+  margin-top: 30px;
 }
 
-.next {
-  margin: 0 5px;
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-gap: 2px;
+  margin: 20px auto;
+  width: 306px;
+  justify-content: center; /* Center the cells horizontally */
+}
+
+/* Styles for the cells */
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  font-size: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Styles for the controls */
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+}
+
+/* Styles for the buttons */
+button {
+  margin: 5px;
+  font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+
+/* Styles for the undo and redo buttons */
+button#undoButton {
+  background-color: #f44336;
+  color: white;
+}
+
+button#redoButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Styles for the history log */
+.history {
+  text-align: left;
+  margin-top: 20px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: 300px; /* Increase the width of the history log */
+  font-size: 16px; /* Increase the font size of the history log */
+  align-self: start; /* Align the history log to the start (top) of the container */
 }
