@@ -6,7 +6,9 @@ let scoreX = 0;
 let scoreO = 0;
 let scoreDraw = 0;
 
+
 const cells = document.querySelectorAll('.cell');
+const strike= document.getElementById("strike");
 const undoButton = document.getElementById('undoButton');
 const redoButton = document.getElementById('redoButton');
 const restartButton = document.getElementById('restartButton');
@@ -15,6 +17,9 @@ const scoreOElement = document.getElementById('scoreO');
 const scoreDrawElement = document.getElementById('scoreDraw');
 const historyLog = document.getElementById('historyLog');
 const clearHistoryButton = document.getElementById('clearHistoryButton');
+
+
+
 
 
 cells.forEach((cell, index) => {
