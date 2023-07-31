@@ -2,13 +2,20 @@
 <html>
 <head>
   <title>Tic Tac Toe</title>
+  
   <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
-  <h1>Tic Tac Toe</h1>
+  
+
+  <div class="box glow">
+
+ 
+  <h1 class="">Tic Tac Toe</h1>
+  
   <div class="container" id="gameBoard">
     <div class="cell" onclick="makeMove(0)"></div>
-    <div class="cell" onclick="makeMove(1)"></div>
+    <div class="cell " onclick="makeMove(1)"></div>
     <div class="cell" onclick="makeMove(2)"></div>
     <div class="cell" onclick="makeMove(3)"></div>
     <div class="cell" onclick="makeMove(4)"></div>
@@ -16,20 +23,25 @@
     <div class="cell" onclick="makeMove(6)"></div>
     <div class="cell" onclick="makeMove(7)"></div>
     <div class="cell" onclick="makeMove(8)"></div>
+      <div id="strike" class="strike"></div>
   </div>
   <div class="scoreboard-container">
     <div class="scoreboard">
-      <div class="score">Player X: <span id="scoreX">0</span></div>
-      <div class="score">Player O: <span id="scoreO">0</span></div>
-      <div class="score">Draw: <span id="scoreDraw">0</span></div>
+      <div class="score1">PLAYER X: <span id="scoreX">0</span></div>
+      <div class="score2">PLAYER O: <span id="scoreO">0</span></div>
+      <div class="score3">DRAW: <span id="scoreDraw">0</span></div>
     </div>
   <div class="controls">
-    <button onclick="undoMove()">Undo</button>
-    <button onclick="redoMove()">Redo</button>
+    
+    <button class="und" style="--clr:#495f70" onclick="undoMove()">Undo</button>
+    <button class="redo" style="--clr:#495f70" onclick="redoMove()">Redo</button>
   </div>
-   <button onclick="resetBoard()">Restart</button>
-   <button onclick="clearHistory()">Clear History</button>
+   <button class="rest" style="--clr:#495f70" onclick="resetBoard()">Play Again</button>
+   <button class="clear" style="--clr:#495f70" onclick="clearHistory()">Clear History</button>
+   </a>
    <div id="historyLog" class="history"></div>
   <script src="./app.js"></script>
+
+</div>
 </body>
 </html>
