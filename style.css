@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Cinzel:wght@500&family=EB+Garamond&family=Poppins:wght@500&family=Satisfy&display=swap');
 @import url('https://fonts.cdnfonts.com/css/titania');
 @import url('https://fonts.cdnfonts.com/css/games');
+@import url('https://fonts.cdnfonts.com/css/chloreal');
 
 
 
@@ -73,7 +74,7 @@ width: 100%;
 
 
 .und{
-  font-family: 'Games', sans-serif;
+  font-family: 'Chloreal', sans-serif;
   border-radius: 5px;
   transition: 0.2s;
   background: #282727;
@@ -94,7 +95,7 @@ width: 100%;
 
 
 .redo{
-  font-family: 'Games', sans-serif;
+  font-family: 'Chloreal', sans-serif;
   border-radius: 5px;
   transition: 0.2s;
   background: #282727;
@@ -113,7 +114,7 @@ width: 100%;
 }
 
 .rest {
-  font-family: 'Games', sans-serif;
+  font-family: 'Chloreal', sans-serif;
   border-radius: 5px;
   transition: 0.2s;
   background: #282727;
@@ -132,7 +133,7 @@ width: 100%;
 }
 
 .clear{
-  font-family: 'Games', sans-serif;
+  font-family: 'Chloreal', sans-serif;
   border-radius: 5px;
   transition: 0.2s;
   background: #282727;
@@ -160,7 +161,7 @@ width: 100%;
 
 /* Styles for the cells */
 .cell {
-  color: greenyellow;
+  color: yellowgreen   ;
   width: 100px;
   height: 100px;
   border: 2px solid white;
@@ -191,14 +192,15 @@ button {
 /* Styles for the history log */
 .history {
   color: white;
+    font-family: 'Games', sans-serif; 
   position: absolute;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 40px;
   top: 0;
   right: 130%;
   padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
+  border: 5px solid #ccc;
+  border-radius: 5px;
   width: 300px; /* Increase the width of the history log */
   font-size: 16px; /* Increase the font size of the history log */
   align-self: start; /* Align the history log to the start (top) of the container */
