@@ -59,6 +59,20 @@ width: 100%;
 }
 
 
+h2 {
+  display: flex;
+  font-family: 'Bungee Spice', cursive;
+  position: absolute;
+  letter-spacing: 5px;
+  color: #0bff23;
+  text-transform: uppercase;
+  margin-top: 0px;
+  top: 0;
+  right: 85%;
+   width: 100%;
+ 
+  }
+
 
 .score1 {
   font-family: 'Bungee Spice', cursive;
@@ -206,7 +220,25 @@ button {
   align-self: start; /* Align the history log to the start (top) of the container */
 }
 
+/* @keyframes h2
+{
+  0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92%
+  {
+    color: #0e3742;
+    box-shadow: none;
+  }
+  18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100%
+  {
+    color:  #ebff14 ; ;
+    box-shadow: 0 0 10px #03bcf4,
+    0 0 20px #03bcf4
+    0 0 40px #03bcf4
+    0 0 80px #03bcf4
+    0 0 160px #03bcf4;
 
+  }
+
+} */
 
 
 
@@ -219,7 +251,7 @@ button {
   }
   18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100%
   {
-    color: #0FFF50 ;
+    color: #0ecd41 ;
     box-shadow: 0 0 10px #03bcf4,
     0 0 20px #03bcf4
     0 0 40px #03bcf4
@@ -227,8 +259,12 @@ button {
     0 0 160px #03bcf4;
 
   }
-
+/* color: #ebff14 ; */
 }
+
+
+
+
 
 @keyframes animate{
   0%{
